@@ -46,8 +46,6 @@ app.use((req, res) => {
   res.sendFile(notFoundPagePath);
 });
 
-app.use(express.static('public'));
-
 const port = 80;
 
 app.listen(port, () => {
