@@ -19,9 +19,6 @@ const hosts = [
     }
 ];
 
-
-
-// Fikret.com.tr isteklerini yönlendirme
 app.use('/',
   (req, res, next) => {
     console.log('A Request Came',req.headers.host);
@@ -40,7 +37,6 @@ app.use('/',
 
 app.use(express.static('public'));
 
-// Sayfa bulunamadığında HTML dosyası döndürme
 app.use((req, res) => {
   const notFoundPagePath = path.join(__dirname, 'public', 'not-found.html');
   res.sendFile(notFoundPagePath);
