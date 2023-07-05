@@ -14,6 +14,10 @@ const hosts = [
       targetUrl: "http://localhost:4000"
     },
     {
+      reqHost: "www.orgsocial.com.tr",
+      targetUrl: "http://localhost:4000"
+    },
+    {
       reqHost: "jw.orgsocial.com.tr",
       targetUrl: "http://localhost:4002"
     },
