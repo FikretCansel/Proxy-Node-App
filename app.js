@@ -14,6 +14,10 @@ const hosts = [
       targetUrl: "http://localhost:3000/fikretcansel"
     },
     {
+      reqHost: "cv.fikfikret.com.tr",
+      targetUrl: "http://localhost:3000/fikretcansel/fikretcansel/cv"
+    },
+    {
       reqHost: "orgsocial.com.tr",
       targetUrl: "http://localhost:4000"
     },
@@ -45,7 +49,7 @@ const hosts = [
 
 app.use('/',
   (req, res, next) => {
-    console.log('A Request Came',req.headers.host);
+    // console.log('A Request Came',req.headers.host);
     const matchedHost = hosts.find(host=> host.reqHost === req.headers.host);
     if(matchedHost){
         const proxy = createProxyMiddleware({
