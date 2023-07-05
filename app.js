@@ -10,6 +10,10 @@ const hosts = [
       targetUrl: "http://localhost:3000/fikretcansel"
     },
     {
+      reqHost: "www.fikfikret.com.tr",
+      targetUrl: "http://localhost:3000/fikretcansel"
+    },
+    {
       reqHost: "orgsocial.com.tr",
       targetUrl: "http://localhost:4000"
     },
@@ -29,6 +33,10 @@ const hosts = [
         reqHost: "softfes.fikfikret.com.tr",
         targetUrl: "http://localhost:3000"
     },
+    {
+      reqHost: "www.softfes.fikfikret.com.tr",
+      targetUrl: "http://localhost:3000"
+  },
     {
         reqHost: "localhost",
         targetUrl: "http://localhost:8080/"
