@@ -6,8 +6,20 @@ const app = express();
 
 const hosts = [
     {
-        reqHost: "gizlisanat.orgsocial.com.tr",
-        targetUrl: "http://localhost:8080"
+      reqHost: "fikfikret.com.tr",
+      targetUrl: "http://localhost:3000/fikretcansel"
+    },
+    {
+      reqHost: "orgsocial.com.tr",
+      targetUrl: "http://localhost:4000"
+    },
+    {
+      reqHost: "jw.orgsocial.com.tr",
+      targetUrl: "http://localhost:4002"
+    },
+    {
+      reqHost: "jetweb.orgsocial.com.tr",
+      targetUrl: "http://localhost:4003"
     },
     {
         reqHost: "softfes.fikfikret.com.tr",
@@ -30,7 +42,11 @@ app.use('/',
         });        
         proxy(req,res,next);
     }else {
-        next();
+      const proxy = createProxyMiddleware({
+        target: "http://localhost:4002", // Yerel uygulamanın adresi
+        changeOrigin: true,
+      });
+      proxy(req,res,next);
     }
   }
 );
