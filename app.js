@@ -87,9 +87,11 @@ const sniCallback = (serverName, callback) => {
 	let key = null;
 
 	if (serverName === 'fikfikret.com.tr') {
+    console.log('fikfikret çalıştı');
 		cert = fs.readFileSync(path.join(__dirname, 'cert', 'fikfikret.com.tr' ,'cert.pem'));
 		key = fs.readFileSync(path.join(__dirname, 'cert', 'fikfikret.com.tr' ,'key.pem'));
 	} else {
+    console.log('orgsocial çalıştı')
 		cert = sniDefaultCert;
 		key = sniDefaultKey;
 	}
