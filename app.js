@@ -113,10 +113,10 @@ const serverOptions = {
 	minVersion: 'TLSv1.2'
 }
 
-const port = 443;
-const sslServer = https.createServer(serverOptions, app);
+const PORT = 443;
+const sslServer = https.Server(serverOptions, app);
 
-sslServer.listen(port, () => {
-  console.log('Listening Port ', port);
+sslServer.listen(PORT, () => {
+  console.log('Listening Port ', PORT);
 });
 
