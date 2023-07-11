@@ -60,13 +60,9 @@ app.use('/',
             target: matchedHost.targetUrl, // Yerel uygulamanın adresi
             changeOrigin: true
         });        
-        proxy(req,res,next);
+        return proxy(req,res,next);
     } else {
-      const proxy = createProxyMiddleware({
-        target: "http://localhost:4002", // Yerel uygulamanın adresi
-        changeOrigin: true,
-      });
-      proxy(req,res,next);
+      next();
     }
   }
 );
