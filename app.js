@@ -61,7 +61,7 @@ app.use('/',
             changeOrigin: true
         });        
         proxy(req,res,next);
-    }else {
+    } else {
       const proxy = createProxyMiddleware({
         target: "http://localhost:4002", // Yerel uygulamanın adresi
         changeOrigin: true,
@@ -78,8 +78,15 @@ app.use((req, res) => {
   res.sendFile(notFoundPagePath);
 });
 
-const sniDefaultCert = fs.readFileSync(path.join(__dirname, 'cert','orgsocial.com.tr', 'cert.pem'));
-const sniDefaultKey = fs.readFileSync(path.join(__dirname, 'cert','orgsocial.com.tr', 'key.pem'));
+const readCertificate = (address, fileName) =>{
+  return fs.readFileSync(path.join(__dirname, 'cert',address, fileName));
+}
+
+const orgsocialCert = readCertificate('orgsocial.com.tr','cert.pem');
+const orgsocialKey = readCertificate('orgsocial.com.tr','key.pem');
+
+const fikfikretCert = readCertificate('fikfikret.com.tr','cert.pem');
+const fikfikretKey = readCertificate('fikfikret.com.tr','key.pem');
 
 const sniCallback = (serverName, callback) => {
 	console.log('sni call back ', serverName);
@@ -88,12 +95,12 @@ const sniCallback = (serverName, callback) => {
 
 	if (serverName.includes('fikfikret.com.tr')) {
     console.log('fikfikret çalıştı');
-		cert = fs.readFileSync(path.join(__dirname, 'cert', 'fikfikret.com.tr' ,'cert.pem'));
-		key = fs.readFileSync(path.join(__dirname, 'cert', 'fikfikret.com.tr' ,'key.pem'));
+		cert = fikfikretCert
+		key = fikfikretKey
 	} else {
     console.log('orgsocial çalıştı')
-		cert = sniDefaultCert;
-		key = sniDefaultKey;
+		cert = orgsocialCert;
+		key = orgsocialKey;
 	}
 
 	callback(null, new tls.createSecureContext({
