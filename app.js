@@ -54,7 +54,7 @@ app.use('/',
     if(matchedHost){
         const proxy = createProxyMiddleware({
             target: matchedHost.targetUrl, // Yerel uygulamanın adresi
-            changeOrigin: true,
+            changeOrigin: true
         });        
         proxy(req,res,next);
     }else {
@@ -74,7 +74,7 @@ app.use((req, res) => {
   res.sendFile(notFoundPagePath);
 });
 
-const port = 80;
+const port = 443;
 
 app.listen(port, () => {
   console.log('Listening Port ', port);
