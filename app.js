@@ -37,6 +37,10 @@ const hosts = [
       targetUrl: "http://localhost:4003"
     },
     {
+      reqHost: "jetwebapi.orgsocial.com.tr",
+      targetUrl: "http://localhost:4001"
+    },
+    {
         reqHost: "softfes.fikfikret.com.tr",
         targetUrl: "http://localhost:3000"
     },
@@ -90,11 +94,9 @@ const sniCallback = (serverName, callback) => {
 	let key = null;
 
 	if (serverName.includes('fikfikret.com.tr')) {
-    console.log('fikfikret çalıştı');
 		cert = fikfikretCert
 		key = fikfikretKey
 	} else {
-    console.log('orgsocial çalıştı')
 		cert = orgsocialCert;
 		key = orgsocialKey;
 	}
