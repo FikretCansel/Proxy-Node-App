@@ -86,7 +86,7 @@ const sniCallback = (serverName, callback) => {
 	let cert = null;
 	let key = null;
 
-	if (serverName === 'fikfikret.com.tr') {
+	if (serverName.includes('fikfikret.com.tr')) {
     console.log('fikfikret çalıştı');
 		cert = fs.readFileSync(path.join(__dirname, 'cert', 'fikfikret.com.tr' ,'cert.pem'));
 		key = fs.readFileSync(path.join(__dirname, 'cert', 'fikfikret.com.tr' ,'key.pem'));
