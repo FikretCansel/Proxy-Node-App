@@ -51,6 +51,7 @@ const hosts = [
 
 app.use('/',
   (req, res, next) => {
+    console.log('Req socket server name : ', req.socket.servername);
     // console.log('A Request Came',req.headers.host);
     const matchedHost = hosts.find(host=> host.reqHost === req.headers.host);
     if(matchedHost){
@@ -76,14 +77,38 @@ app.use((req, res) => {
   res.sendFile(notFoundPagePath);
 });
 
+const sniDefaultCert = fs.readFileSync(path.join(__dirname, 'cert','orgsocial.com.tr', 'cert.pem'));
+const sniDefaultKey = fs.readFileSync(path.join(__dirname, 'cert','orgsocial.com.tr', 'key.pem'));
+
+const sniCallback = (serverName, callback) => {
+	console.log('sni call back ', serverName);
+	let cert = null;
+	let key = null;
+
+	if (serverName === 'fikfikret.com.tr') {
+		cert = fs.readFileSync(path.join(__dirname, 'cert', 'fikfikret.com.tr' ,'cert.pem'));
+		key = fs.readFileSync(path.join(__dirname, 'cert', 'fikfikret.com.tr' ,'key.pem'));
+	} else {
+		cert = sniDefaultCert;
+		key = sniDefaultKey;
+	}
+
+	callback(null, new tls.createSecureContext({
+		cert,
+		key,
+	}));
+}
+
+const serverOptions = {
+	SNICallback: sniCallback,
+
+	// Optional: TLS Versions
+	maxVersion: 'TLSv1.3',
+	minVersion: 'TLSv1.2'
+}
+
 const port = 443;
-
-
-const sslServer = https.createServer({
-  key: fs.readFileSync(path.join(__dirname, 'cert', 'key.pem')),
-  cert: fs.readFileSync(path.join(__dirname, 'cert', 'cert.pem'))
-},
-app);
+const sslServer = https.createServer(serverOptions, app);
 
 sslServer.listen(port, () => {
   console.log('Listening Port ', port);
