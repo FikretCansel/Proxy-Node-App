@@ -74,7 +74,7 @@ app.use('/',
         console.log("else girdikten sonra domains", domain)
         if(domain && domain.projectPath) {
           const proxy = createProxyMiddleware({
-            target: `http://localhost:4002${domain.projectPath}`, // Yerel uygulamanın adresi
+            target: `https://jw.orgsocial.com.tr${domain.projectPath}`, // Yerel uygulamanın adresi
             changeOrigin: true
         });
         console.log("http://localhost:4002"+domain.projectPath)
