@@ -56,7 +56,7 @@ const hosts = [
 ];
 
 app.use('/',
-  (req, res, next) => {
+  async (req, res, next) => {
     console.log('Req socket server name : ', req.socket.servername);
     // console.log('A Request Came',req.headers.host);
     const matchedHost = hosts.find(host=> host.reqHost === req.headers.host);
@@ -70,7 +70,7 @@ app.use('/',
       console.log("else girdi");
       try {
         const db = getDb();
-        const domain= db.collection("domains").findOne({name: req.headers.host});
+        const domain= await db.collection("domains").findOne({name: req.headers.host});
         console.log("else girdikten sonra domains", domain)
         if(domain && domain.projectPath) {
           const proxy = createProxyMiddleware({
