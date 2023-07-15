@@ -67,17 +67,15 @@ app.use('/',
         });        
         return proxy(req,res,next);
     } else {
-      console.log("else girdi");
       try {
         const db = getDb();
         const domain= await db.collection("domains").findOne({name: req.headers.host});
         console.log("else girdikten sonra domains", domain)
         if(domain && domain.projectPath) {
           const proxy = createProxyMiddleware({
-            target: `https://jw.orgsocial.com.tr${domain.projectPath}`, // Yerel uygulamanın adresi
+            target: `http://localhost:4002${domain.projectPath}`,
             changeOrigin: true
         });
-        console.log("http://localhost:4002"+domain.projectPath)
         return proxy(req,res,next);
         }else{
           next();
