@@ -77,6 +77,7 @@ app.use('/',
             target: "http://localhost:4002"+domain.projectPath, // Yerel uygulamanın adresi
             changeOrigin: true
         });
+        console.log("http://localhost:4002"+domain.projectPath)
         return proxy(req,res,next);
         }else{
           next();
