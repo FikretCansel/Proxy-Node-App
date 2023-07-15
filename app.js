@@ -71,6 +71,7 @@ app.use('/',
       try {
         const db = getDb();
         const domain= db.collection("domains").findOne({name: req.headers.host});
+        console.log("else girdikten sonra domains", domain)
         if(domain && domain.projectPath) {
           const proxy = createProxyMiddleware({
             target: "http://localhost:4002"+domain.projectPath, // Yerel uygulamanın adresi
