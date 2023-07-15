@@ -4,6 +4,7 @@ const path = require('path');
 const https = require('https');
 const fs = require('fs');
 const tls = require('tls');
+const {mongoConnect, getDb} = require("./mongoConnect");
 
 const app = express();
 
@@ -66,7 +67,23 @@ app.use('/',
         });        
         return proxy(req,res,next);
     } else {
-      next();
+      console.log("else girdi");
+      try {
+        const db = getDb();
+        const domain= db.collection("domains").findOne({name: req.headers.host});
+        if(domain && domain.projectPath) {
+          const proxy = createProxyMiddleware({
+            target: "http://localhost:4002"+domain.projectPath, // Yerel uygulamanın adresi
+            changeOrigin: true
+        });
+        return proxy(req,res,next);
+        }else{
+          next();
+        }
+          
+      } catch (error) {
+        next(); 
+      }
     }
   }
 );
@@ -89,7 +106,6 @@ const fikfikretCert = readCertificate('fikfikret.com.tr','cert.pem');
 const fikfikretKey = readCertificate('fikfikret.com.tr','key.pem');
 
 const sniCallback = (serverName, callback) => {
-	console.log('sni call back ', serverName);
 	let cert = null;
 	let key = null;
 
@@ -115,10 +131,15 @@ const serverOptions = {
 	minVersion: 'TLSv1.2'
 }
 
-const PORT = 443;
+const mongoDbConnectionString = "mongodb://FikretCansel:cokguzel.sos.medya55@localhost:27017/PublishBackend?authSource=admin&readPreference=primary&appname=MongoDB%20Compass%20Isolated%20Edition&directConnection=true&ssl=false";
 const sslServer = https.Server(serverOptions, app);
 
-sslServer.listen(PORT, () => {
-  console.log('Listening Port ', PORT);
-});
+mongoConnect(() => {
+  const PORT = 443;
+  sslServer.listen(PORT, () => {
+    console.log('Listening Port ', PORT);
+  });
+},mongoDbConnectionString);
+
+
 
