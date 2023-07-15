@@ -2,7 +2,7 @@ const {MongoClient} = require('mongodb');
 
 let _db;
 
-module.exports = mongoConnect=(callback, mongoDbConnectionString)=>{
+exports.mongoConnect=(callback, mongoDbConnectionString)=>{
     MongoClient.connect(mongoDbConnectionString)
     .then((client)=>{
         console.log("Connected MongoDb");
@@ -11,7 +11,7 @@ module.exports = mongoConnect=(callback, mongoDbConnectionString)=>{
     }).catch((err)=>console.log("Detected error. "+err));
 }
 
-module.exports = getDb=()=> {
+exports.getDb=()=> {
     if(_db){
         return _db;
     }

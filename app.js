@@ -4,7 +4,7 @@ const path = require('path');
 const https = require('https');
 const fs = require('fs');
 const tls = require('tls');
-const mongoConnect = require("./mongoConnect");
+const {mongoConnect,getDb} = require("./mongoConnect");
 
 const app = express();
 
@@ -69,7 +69,7 @@ app.use('/',
     } else {
       console.log("else girdi");
       try {
-        const db = mongoConnect.getDb();
+        const db = getDb();
         const domain= db.collection("domains").findOne({name: req.headers.host});
         if(domain && domain.projectPath) {
           const proxy = createProxyMiddleware({
@@ -134,7 +134,7 @@ const serverOptions = {
 const mongoDbConnectionString = "mongodb://FikretCansel:cokguzel.sos.medya55@localhost:27017/PublishBackend?authSource=admin&readPreference=primary&appname=MongoDB%20Compass%20Isolated%20Edition&directConnection=true&ssl=false";
 const sslServer = https.Server(serverOptions, app);
 
-mongoConnect.mongoConnect(() => {
+mongoConnect(() => {
   const PORT = 443;
   sslServer.listen(PORT, () => {
     console.log('Listening Port ', PORT);
