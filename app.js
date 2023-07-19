@@ -49,6 +49,10 @@ const hosts = [
       reqHost: "www.softfes.fikfikret.com.tr",
       targetUrl: "http://localhost:3000"
   },
+  {
+    reqHost: "gizlisanat.orgsocial.com.tr",
+    targetUrl: "http://localhost:5000"
+},
     {
         reqHost: "localhost",
         targetUrl: "http://localhost:8080/"
