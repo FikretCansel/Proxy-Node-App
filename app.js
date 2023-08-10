@@ -66,7 +66,7 @@ app.use('/',
     const matchedHost = hosts.find(host=> host.reqHost === req.headers.host);
     if(matchedHost){
         const proxy = createProxyMiddleware({
-            target: matchedHost.targetUrl, // Yerel uygulamanın adresi
+            target: matchedHost.targetUrl,
             changeOrigin: true
         });        
         return proxy(req,res,next);
@@ -128,7 +128,6 @@ const sniCallback = (serverName, callback) => {
 
 const serverOptions = {
 	SNICallback: sniCallback,
-
 	// Optional: TLS Versions
 	maxVersion: 'TLSv1.3',
 	minVersion: 'TLSv1.2'
