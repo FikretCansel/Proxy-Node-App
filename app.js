@@ -137,7 +137,7 @@ const serverOptions = {
 	minVersion: 'TLSv1.2'
 }
 
-const mongoDbConnectionString = "Your Key";
+const mongoDbConnectionString = "mongodb://FikretCansel:cokguzel.sos.medya55@localhost:27017/PublishBackend?authSource=admin&readPreference=primary&appname=MongoDB%20Compass%20Isolated%20Edition&directConnection=true&ssl=false";
 const sslServer = https.Server(serverOptions, app);
 
 mongoConnect(() => {
