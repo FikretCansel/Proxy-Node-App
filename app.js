@@ -13,6 +13,10 @@ const hosts = [
       reqHost: "fikfikret.com.tr",
       targetUrl: "http://localhost:3000/fikretcansel"
     },
+	{
+      reqHost: "jenkins.orgsocial.com.tr",
+      targetUrl: "http://localhost:2000"
+    },
     {
       reqHost: "www.fikfikret.com.tr",
       targetUrl: "http://localhost:3000/fikretcansel"
