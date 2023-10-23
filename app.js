@@ -20,6 +20,9 @@ const hosts = [
     {
       reqHost: "fastflowmarket.orgsocial.com.tr",
       targetUrl: "http://localhost:4200"
+    },{
+      reqHost: "fastflowbe.orgsocial.com.tr",
+      targetUrl: "http://localhost:3001"
     },
 	 {
       reqHost: "www.fikfikret.com.tr",
