@@ -70,7 +70,7 @@ app.use('/',
     const matchedHost = hosts.find(host=> host.reqHost === req.headers.host);
     if(matchedHost){
         const proxy = createProxyMiddleware({
-            target: matchedHost.targetUrl
+            target: matchedHost.targetUrl, changeOrigin: true
         });        
         return proxy(req,res,next);
     } else {
@@ -79,7 +79,7 @@ app.use('/',
         const domain= await db.collection("domains").findOne({name: req.headers.host});
         if(domain && domain.projectPath) {
           const proxy = createProxyMiddleware({
-            target: `http://localhost:4002${domain.projectPath}`
+            target: `http://localhost:4002${domain.projectPath}`, changeOrigin: true
         });
         return proxy(req,res,next);
         }else{
