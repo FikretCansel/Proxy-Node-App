@@ -62,7 +62,7 @@ const hosts = [
   },
   {
     reqHost: "gizlisanat.orgsocial.com.tr",
-    targetUrl: "http://localhost:5000"
+    targetUrl: "http://localhost:8020"
 },
     {
         reqHost: "localhost",
