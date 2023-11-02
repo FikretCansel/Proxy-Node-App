@@ -72,7 +72,7 @@ const hosts = [
 
 app.use('/',
   async (req, res, next) => {
-    console.log('Req socket server name : ', req.socket.servername);
+    // console.log('Req socket server name : ', req.socket.servername);
     // console.log('A Request Came',req.headers.host);
     const matchedHost = hosts.find(host=> host.reqHost === req.headers.host);
     if(matchedHost){
