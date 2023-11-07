@@ -24,6 +24,10 @@ const hosts = [
       reqHost: "fastflowbe.orgsocial.com.tr",
       targetUrl: "http://localhost:3001"
     },
+	{
+      reqHost: "codelearn.orgsocial.com.tr",
+      targetUrl: "http://localhost:3010"
+    },
 	 {
       reqHost: "www.fikfikret.com.tr",
       targetUrl: "http://localhost:3000/fikretcansel"
